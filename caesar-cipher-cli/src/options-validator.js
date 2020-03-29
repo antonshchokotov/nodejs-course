@@ -31,15 +31,29 @@ function optionsValidator() {
       exit(1);
     }
   }
-  // eslint-disable-next-line no-sync
-  if (options.output && !fs.existsSync(`${options.output}`)) {
-    console.error('Error: output file does not exist');
-    exit(1);
+
+  if (options.output) {
+    if (!/\..+$/.test(options.output)) {
+      console.error('Error: output should be a file');
+      exit(1);
+    }
+    // eslint-disable-next-line no-sync
+    if (!fs.existsSync(`${options.output}`)) {
+      console.error('Error: output file does not exist');
+      exit(1);
+    }
   }
-  // eslint-disable-next-line no-sync
-  if (options.input && !fs.existsSync(`${options.input}`)) {
-    console.error('Error: input file does not exist');
-    exit(1);
+
+  if (options.input) {
+    if (!/\..+$/.test(options.input)) {
+      console.error('Error: input should be a file');
+      exit(1);
+    }
+    // eslint-disable-next-line no-sync
+    if (!fs.existsSync(`${options.input}`)) {
+      console.error('Error: input file does not exist');
+      exit(1);
+    }
   }
 
   return options;
