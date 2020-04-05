@@ -22,22 +22,22 @@ const addUser = async user => {
 };
 
 const updateUser = async user => {
-  const users = await getAll();
-  const userIndex = users.findIndex(el => el.id === user.id);
+  const allUsers = await getAll();
+  const userIndex = allUsers.findIndex(el => el.id === user.id);
   if (userIndex >= 0) {
-    const oldUser = users[userIndex];
+    const oldUser = allUsers[userIndex];
     const newUser = { ...oldUser, ...user };
-    users.splice(userIndex, 1, newUser);
+    allUsers.splice(userIndex, 1, newUser);
     return newUser;
   }
   return;
 };
 
 const deleteUser = async id => {
-  const users = await getAll();
-  const userIndex = users.findIndex(el => el.id === id);
+  const allUsers = await getAll();
+  const userIndex = allUsers.findIndex(el => el.id === id);
   if (userIndex >= 0) {
-    users.splice(userIndex, 1);
+    allUsers.splice(userIndex, 1);
     await unassignTasks(id);
     return true;
   }

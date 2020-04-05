@@ -19,23 +19,37 @@ router
   })
   .post(async (req, res) => {
     const newBoard = await boardsService.addBoard(req.body);
-    newBoard ? res.json(newBoard) : res.status(400).send('Bad request');
+    if (newBoard) {
+      res.json(newBoard);
+    } else {
+      res.status(400).send('Bad request');
+    }
   });
 
 router
   .route('/:id')
   .get(async (req, res) => {
     const board = await boardsService.getBoard(req.params.id);
-    board ? res.json(board) : res.status(404).send('Board not found');
+    if (board) {
+      res.json(board);
+    } else {
+      res.status(404).send('Board not found');
+    }
   })
   .put(async (req, res) => {
     const board = await boardsService.updateBoard(req.params.id, req.body);
-    board ? res.json(board) : res.status(400).send('Bad request');
+    if (board) {
+      res.json(board);
+    } else {
+      res.status(400).send('Bad request');
+    }
   })
   .delete(async (req, res) => {
-    (await boardsService.deleteBoard(req.params.id))
-      ? res.status(204).end()
-      : res.status(404).send('Board not found');
+    if (await boardsService.deleteBoard(req.params.id)) {
+      res.status(204).end();
+    } else {
+      res.status(404).send('Board not found');
+    }
   });
 
 module.exports = router;

@@ -19,14 +19,14 @@ const getAll = async boardId => {
 };
 
 const getTask = async (boardId, taskId) => {
-  const tasks = await getAll(boardId);
-  const task = tasks.find(task => task.id === taskId);
+  const allTasks = await getAll(boardId);
+  const task = allTasks.find(el => el.id === taskId);
   return task;
 };
 
 const updateTask = async (boardId, taskId, task) => {
   const currentTask = await getTask(boardId, taskId);
-  const taskIndex = tasks.findIndex(task => task.id === taskId);
+  const taskIndex = tasks.findIndex(el => el.id === taskId);
   const updatedTask = { ...currentTask, ...task };
   tasks.splice(taskIndex, 1, updatedTask);
   return updatedTask;
@@ -46,7 +46,7 @@ const unassignTasks = async userId => {
 };
 
 const deleteTasks = async boardId => {
-  tasksToDelete = tasks.filter(task => task.boardId === boardId);
+  const tasksToDelete = tasks.filter(task => task.boardId === boardId);
   tasksToDelete.forEach(task => {
     const index = tasks.findIndex(el => el.id === task.id);
     tasks.splice(index, 1);
