@@ -26,14 +26,14 @@ const getTask = async (boardId, taskId) => {
 
 const updateTask = async (boardId, taskId, task) => {
   const currentTask = await getTask(boardId, taskId);
-  const taskIndex = tasks.findIndex(task => (task.id = taskId));
+  const taskIndex = tasks.findIndex(task => task.id === taskId);
   const updatedTask = { ...currentTask, ...task };
   tasks.splice(taskIndex, 1, updatedTask);
   return updatedTask;
 };
 
 const deleteTask = async (boardId, taskId) => {
-  const taskIndex = tasks.findIndex(task => (task.id = taskId));
+  const taskIndex = tasks.findIndex(task => task.id === taskId);
   if (taskIndex === -1) return false;
   tasks.splice(taskIndex, 1);
   return true;
