@@ -6,15 +6,15 @@ const getBoard = id => boardsRepo.getBoard(id);
 
 const addBoard = board => {
   if (!board.title || !board.columns[0]) return;
-  for (let column of board.columns) {
+  for (const column of board.columns) {
     if (!column.title || !Number.isInteger(column.order)) return;
   }
   return boardsRepo.addBoard(board);
-}
+};
 
 const updateBoard = (id, board) => {
   return boardsRepo.updateBoard(id, board);
-}
+};
 
 const deleteBoard = id => boardsRepo.deleteBoard(id);
 
