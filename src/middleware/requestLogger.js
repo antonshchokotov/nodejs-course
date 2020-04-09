@@ -5,7 +5,7 @@ let requestsCounter = 0;
 
 module.exports = (req, res, next) => {
   const timestamp = new Date().toISOString();
-  const { method, url, body } = req;
+  const { method, url, body, query } = req;
   const params = {};
 
   const userId = /^\/users\/([\w-]+)/.exec(url);
@@ -21,8 +21,9 @@ module.exports = (req, res, next) => {
     timestamp,
     method,
     url,
-    body,
-    params
+    query,
+    params,
+    body
   };
 
   const logEntry = `${JSON.stringify(logObject)}\n\n`;
