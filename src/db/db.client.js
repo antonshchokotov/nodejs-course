@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { MONGO_CONNECTION_STRING } = require('../common/config');
-const { users, boards } = require('./db.initial.state');
+const { users, boards, tasks } = require('./db.initial.state');
 
 const connectToDB = cb => {
   mongoose.connect(MONGO_CONNECTION_STRING, {
@@ -14,7 +14,8 @@ const connectToDB = cb => {
     await db.dropDatabase();
     users.forEach(user => user.save());
     boards.forEach(board => board.save());
-    console.log('connected to DB rest');
+    tasks.forEach(task => task.save());
+    console.log('connected to DB');
     cb();
   });
 };

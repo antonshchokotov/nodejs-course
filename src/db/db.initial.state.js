@@ -1,5 +1,6 @@
 const User = require('../resources/users/user.model');
 const Board = require('../resources/boards/board.model');
+const Task = require('../resources/tasks/task.model');
 
 const users = [
   new User({ name: 'name1', login: 'login1', password: 'password1' }),
@@ -24,4 +25,12 @@ const boards = [
   })
 ];
 
-module.exports = { users, boards };
+const tasks = [
+  new Task({
+    title: 'task1',
+    order: 100,
+    description: 'task1_description'
+  })
+];
+
+module.exports = { users, boards, tasks };
