@@ -11,7 +11,7 @@ process.on('uncaughtException', (error, origin) => {
     origin,
     stack: error.stack
   });
-  exit(1);
+  logger.on('finish', () => exit(1));
 });
 
 process.on('unhandledRejection', (reason, promise) => {
@@ -23,7 +23,6 @@ process.on('unhandledRejection', (reason, promise) => {
     promise: `${promise}`,
     stack: reason.stack
   });
-  exit(1);
 });
 
 app.listen(PORT, () =>
