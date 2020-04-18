@@ -33,4 +33,10 @@ const tasks = [
   })
 ];
 
-module.exports = { users, boards, tasks };
+const DBInitialState = () => {
+  users.forEach(user => user.save());
+  boards.forEach(board => board.save());
+  tasks.forEach(task => task.save());
+};
+
+module.exports = DBInitialState;
