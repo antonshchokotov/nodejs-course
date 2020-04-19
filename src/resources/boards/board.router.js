@@ -2,6 +2,7 @@ const router = require('express').Router();
 const boardsService = require('./board.service');
 const taskRouter = require('../tasks/task.router');
 const { customError, catchError } = require('../../common/error');
+const Board = require('./board.model');
 
 router.use(
   '/:id/tasks/',
@@ -17,14 +18,14 @@ router
   .get(
     catchError(async (req, res) => {
       const boards = await boardsService.getAll();
-      res.json(boards);
+      res.json(boards.map(i => Board.toResponse(i)));
     })
   )
   .post(
     catchError(async (req, res) => {
       const newBoard = await boardsService.addBoard(req.body);
       if (newBoard) {
-        res.json(newBoard);
+        res.json(Board.toResponse(newBoard));
       } else {
         throw new customError(400, 'Bad request');
       }
@@ -37,7 +38,7 @@ router
     catchError(async (req, res) => {
       const board = await boardsService.getBoard(req.params.id);
       if (board) {
-        res.json(board);
+        res.json(Board.toResponse(board));
       } else {
         throw new customError(404, 'Board not found');
       }

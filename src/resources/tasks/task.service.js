@@ -1,4 +1,4 @@
-const tasksRepo = require('./task.memory.repository');
+const tasksRepo = require('./task.db.repository');
 
 const addTask = task => {
   return tasksRepo.addTask(task);
@@ -9,13 +9,11 @@ const getAll = async boardId => {
 };
 
 const getTask = async (boardId, taskId) => {
-  const task = await tasksRepo.getTask(boardId, taskId);
-  return task;
+  return await tasksRepo.getTask(boardId, taskId);
 };
 
 const updateTask = async (boardId, taskId, task) => {
-  const updatedTask = await tasksRepo.updateTask(boardId, taskId, task);
-  return updatedTask;
+  return await tasksRepo.updateTask(boardId, taskId, task);
 };
 
 const deleteTask = async (boardId, taskId) => {
