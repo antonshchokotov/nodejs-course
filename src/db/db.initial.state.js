@@ -1,11 +1,13 @@
 const User = require('../resources/users/user.model');
 const Board = require('../resources/boards/board.model');
 const Task = require('../resources/tasks/task.model');
+const bcrypt = require('bcrypt');
+
+// eslint-disable-next-line no-sync
+const adminPasswordHash = bcrypt.hashSync('admin', 10);
 
 const users = [
-  new User({ name: 'name1', login: 'login1', password: 'password1' }),
-  new User({ name: 'name2', login: 'login2', password: 'password2' }),
-  new User({ name: 'name3', login: 'login3', password: 'password3' })
+  new User({ name: 'John Doe', login: 'admin', password: adminPasswordHash })
 ];
 
 const boards = [
