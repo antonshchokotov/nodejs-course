@@ -10,7 +10,7 @@ router.route('/').post(
     } else {
       const token = await loginService.authenticateUser(login, password);
       if (token) {
-        res.status(200).send(token);
+        res.status(200).send({ token });
       } else {
         throw new customError(403, 'Forbidden');
       }
